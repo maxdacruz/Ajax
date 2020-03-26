@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" method="POST">
+      Search Movie
+      <input type="text" name="search" />
+    </form>
+    <div id="resultForm">...</div>
+
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function() {
+        $('input[type="text"]').keyup(function(e) {
+          console.log("hohoho");
+          e.preventDefault();
+          $.ajax({
+            url: "search-movie.php",
+            type: "post",
+            data: $("form").serialize(),
+            success: function(result) {
+              let myMovies = result;
+              $("#resultForm").html("<div>" + result + "</div>");
+            },
+            error: function(err) {}
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
